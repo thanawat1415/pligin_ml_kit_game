@@ -12,8 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  google_ml_kit_1:
+    path: ../flutter-ml-kit-pose-plugin-main
   google_ml_kit:
-    path: ../
+    path: ../flutter-ml-kit-pose-plugin-bas
   camera: ^0.8.1+7
 
   cupertino_icons: ^1.0.2

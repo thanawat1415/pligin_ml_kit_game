@@ -1,14 +1,16 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'VisionDetectorViews/detector_views.dart';
 import 'package:flutter/material.dart';
 
+import 'all_images/model.dart';
+
 List<CameraDescription> cameras = [];
+// List<CameraDescription> _availableCameras;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  // _availableCameras = await availableCameras();
   cameras = await availableCameras();
   runApp(MyApp());
 }
@@ -35,39 +37,33 @@ class Home extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: [
-                  ExpansionTile(
-                    title: const Text("Vision"),
-                    children: [
-                      CustomCard(
-                        'Pose Detector Without Classifier',
-                        PoseDetectorView(
-                          useClassifier: false,
-                        ),
-                        featureCompleted: true,
-                      ),
-                      CustomCard(
-                        'Pose Detector With Classifier',
-                        PoseDetectorView(
-                          useClassifier: true,
-                        ),
-                        featureCompleted: true,
-                      ),
-                      CustomCard(
-                        'Pose Detector Activity',
-                        PoseDetectorView(
-                          useClassifier: true,
-                          isActivity: true,
-                        ),
-                        featureCompleted: true,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                ElevatedButton(
+                    // padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: const Text('test of bas'),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PoseDetectorView1(
+                                    useClassifier: true,
+                                    isActivity: true,
+                                  )));
+                    }),
+                ElevatedButton(
+                    // padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: const Text('test of bas'),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PoseDetectorView(
+                                    useClassifier: true,
+                                    isActivity: true,
+                                  )));
+                    }),
+              ],
             ),
           ),
         ),
@@ -76,35 +72,35 @@ class Home extends StatelessWidget {
   }
 }
 
-class CustomCard extends StatelessWidget {
-  final String _label;
-  final Widget _viewPage;
-  final bool featureCompleted;
+// class CustomCard extends StatelessWidget {
+//   final String _label;
+//   final Widget _viewPage;
+//   final bool featureCompleted;
 
-  const CustomCard(this._label, this._viewPage,
-      {this.featureCompleted = false});
+//   const CustomCard(this._label, this._viewPage,
+//       {this.featureCompleted = false});
 
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      margin: EdgeInsets.only(bottom: 10),
-      child: ListTile(
-        tileColor: Theme.of(context).primaryColor,
-        title: Text(
-          _label,
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        onTap: () {
-          if (Platform.isIOS && !featureCompleted) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: const Text(
-                    'This feature has not been implemented for iOS yet')));
-          } else
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => _viewPage));
-        },
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Card(
+//       elevation: 5,
+//       margin: EdgeInsets.only(bottom: 10),
+//       child: ListTile(
+//         tileColor: Theme.of(context).primaryColor,
+//         title: Text(
+//           _label,
+//           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+//         ),
+//         onTap: () {
+//           if (Platform.isIOS && !featureCompleted) {
+//             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//                 content: const Text(
+//                     'This feature has not been implemented for iOS yet')));
+//           } else
+//             Navigator.push(
+//                 context, MaterialPageRoute(builder: (context) => _viewPage));
+//         },
+//       ),
+//     );
+//   }
+// }
